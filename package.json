@@ -1,0 +1,15 @@
+{
+  "name": "canvas_colors",
+  "version": "1.0.0",
+  "description": "Many students end up using Canvas for later projects. This exercise explores how Canvas works at a basic level. It will give you an introduction to using canvas to draw shapes on a page.",
+  "main": "avg-colors.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^3.5.5"
+  }
+}
