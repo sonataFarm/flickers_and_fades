@@ -9,6 +9,13 @@ const AMPLITUDE = COLOR_MAX / 2; // amplitude of sin wave;
 
 const OFFSET = COLOR_MAX / 2; // offset of sin wave from zero;
 
+const RED_LO = 0.0;
+const RED_HI = 0.1;
+const GREEN_LO = 0.1;
+const GREEN_HI = 0.6;
+const BLUE_LO = 0.1;
+const BLUE_HI = 0.7;
+
 Light = require('./light.js');
 
 class Fade extends Light {
@@ -16,9 +23,9 @@ class Fade extends Light {
     super();
 
     this.hueBases = {
-      red: Math.random(),
-      green: Math.random(),
-      blue: Math.random()
+      red: Math.random() * (RED_HI - RED_LO) + RED_LO,
+      green: Math.random() * (GREEN_HI - GREEN_LO) + GREEN_LO,
+      blue: Math.random() * (BLUE_HI - BLUE_LO) + BLUE_LO,
     };
 
     this.color = this.initializeColor();

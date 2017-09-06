@@ -117,7 +117,7 @@ const Flicker = __webpack_require__(3);
 const Render = __webpack_require__(5);
 const LightBoard = __webpack_require__(6);
 
-const DELAY = 1;
+const DELAY = 100;
 board = new LightBoard();
 canvas = document.getElementById('world');
 render = new Render(canvas, board);
@@ -247,7 +247,7 @@ module.exports = Render;
 LightBox = __webpack_require__(0);
 Fade = __webpack_require__(7);
 
-const DIMENSIONS = 10;
+const DIMENSIONS = 50;
 
 class LightBoard {
   constructor() {
@@ -294,6 +294,13 @@ const AMPLITUDE = COLOR_MAX / 2; // amplitude of sin wave;
 
 const OFFSET = COLOR_MAX / 2; // offset of sin wave from zero;
 
+const RED_LO = 0.0;
+const RED_HI = 0.1;
+const GREEN_LO = 0.1;
+const GREEN_HI = 0.6;
+const BLUE_LO = 0.1;
+const BLUE_HI = 0.7;
+
 Light = __webpack_require__(1);
 
 class Fade extends Light {
@@ -301,9 +308,9 @@ class Fade extends Light {
     super();
 
     this.hueBases = {
-      red: Math.random(),
-      green: Math.random(),
-      blue: Math.random()
+      red: Math.random() * (RED_HI - RED_LO) + RED_LO,
+      green: Math.random() * (GREEN_HI - GREEN_LO) + GREEN_LO,
+      blue: Math.random() * (BLUE_HI - BLUE_LO) + BLUE_LO,
     };
 
     this.color = this.initializeColor();
