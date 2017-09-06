@@ -1,6 +1,8 @@
 LightBox = require('./lightbox.js');
 Fade = require('./fade.js');
 
+const DIMENSIONS = 10;
+
 class LightBoard {
   constructor() {
     this.lightBoxes = [];

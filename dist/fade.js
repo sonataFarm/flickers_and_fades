@@ -1,9 +1,12 @@
 const BASE_COLOR = new Color(0, 0, 0);
-const FADE_RATE = 0.0025;
-const FADE_RATE_VARIANCE = 0.7;
-const FADE_RATE_MULTIPLIER = 1;
-const COLOR_MAX = 255; // max units of color
+const FADE_RATE = 0.0005;
+
+const FADE_RATE_VARIANCE = 2;
+const FADE_RATE_MULTIPLIER = 50;
+
+const COLOR_MAX = 250; // max units of color
 const AMPLITUDE = COLOR_MAX / 2; // amplitude of sin wave;
+
 const OFFSET = COLOR_MAX / 2; // offset of sin wave from zero;
 
 Light = require('./light.js');
@@ -24,9 +27,6 @@ class Fade extends Light {
   }
 
   tick() {
-    // increment the fadeInput
-    // reassign color by multiplying color bases by
-    // if result of sin is 0 set fadeCycles ++
     this.sinInput += (FADE_RATE / Math.random() * FADE_RATE_VARIANCE)
     const sinMultiplier = this.generateSinMultiplier();
     this.color = this.updateColor(sinMultiplier);

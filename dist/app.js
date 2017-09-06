@@ -1,4 +1,4 @@
-const DIMENSIONS = 10;
+const DIMENSIONS = 5;
 
 const LightBox = require ('./lightbox.js');
 const Flicker = require('./flicker.js');

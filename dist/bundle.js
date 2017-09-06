@@ -60,57 +60,11 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-const DIMENSIONS = 10;
-
-const LightBox = __webpack_require__ (2);
-const Flicker = __webpack_require__(1);
-const Render = __webpack_require__(5);
-const LightBoard = __webpack_require__(6);
-
-const DELAY = 1;
-board = new LightBoard();
-canvas = document.getElementById('world');
-render = new Render(canvas, board);
-
-function tick() {
-  board.update();
-  render.renderBoard();
-
-  setTimeout(tick, DELAY);
-}
-
-tick();
-
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-Light = __webpack_require__(3);
-
-class Flicker extends Light {
-  constructor() {
-    this.color = this.setColor();
-
-  }
-
-  setColor() {
-    generateRandomColor();
-  }
-}
-
-module.exports = Flicker;
-
-
-/***/ }),
-/* 2 */
 /***/ (function(module, exports) {
 
 class LightBox {
@@ -134,7 +88,7 @@ module.exports = LightBox;
 
 
 /***/ }),
-/* 3 */
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 Color = __webpack_require__(4);
@@ -150,6 +104,52 @@ class Light {
 }
 
 module.exports = Light;
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const DIMENSIONS = 5;
+
+const LightBox = __webpack_require__ (0);
+const Flicker = __webpack_require__(3);
+const Render = __webpack_require__(5);
+const LightBoard = __webpack_require__(6);
+
+const DELAY = 1;
+board = new LightBoard();
+canvas = document.getElementById('world');
+render = new Render(canvas, board);
+
+function tick() {
+  board.update();
+  render.renderBoard();
+
+  setTimeout(tick, DELAY);
+}
+
+tick();
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+Light = __webpack_require__(1);
+
+class Flicker extends Light {
+  constructor() {
+    this.color = this.setColor();
+
+  }
+
+  setColor() {
+    generateRandomColor();
+  }
+}
+
+module.exports = Flicker;
 
 
 /***/ }),
@@ -217,7 +217,7 @@ class Render {
 
   renderBoard() {
     this.resizeCanvasToWindow();
-
+    this.ctx.fillText("Hello World",10,50);
     const lightboxWidth  = Math.floor(this.canvas.width / this.dimensions);
     const lightboxHeight = Math.floor(this.canvas.height / this.dimensions);
     this.lightBoard.lightBoxes.forEach((row, rowIdx) => {
@@ -244,8 +244,10 @@ module.exports = Render;
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
-LightBox = __webpack_require__(2);
+LightBox = __webpack_require__(0);
 Fade = __webpack_require__(7);
+
+const DIMENSIONS = 10;
 
 class LightBoard {
   constructor() {
@@ -282,14 +284,17 @@ Math.random();
 /***/ (function(module, exports, __webpack_require__) {
 
 const BASE_COLOR = new Color(0, 0, 0);
-const FADE_RATE = 0.0025;
-const FADE_RATE_VARIANCE = 0.7;
-const FADE_RATE_MULTIPLIER = 1;
-const COLOR_MAX = 255; // max units of color
+const FADE_RATE = 0.0005;
+
+const FADE_RATE_VARIANCE = 2;
+const FADE_RATE_MULTIPLIER = 50;
+
+const COLOR_MAX = 250; // max units of color
 const AMPLITUDE = COLOR_MAX / 2; // amplitude of sin wave;
+
 const OFFSET = COLOR_MAX / 2; // offset of sin wave from zero;
 
-Light = __webpack_require__(3);
+Light = __webpack_require__(1);
 
 class Fade extends Light {
   constructor() {
@@ -307,9 +312,6 @@ class Fade extends Light {
   }
 
   tick() {
-    // increment the fadeInput
-    // reassign color by multiplying color bases by
-    // if result of sin is 0 set fadeCycles ++
     this.sinInput += (FADE_RATE / Math.random() * FADE_RATE_VARIANCE)
     const sinMultiplier = this.generateSinMultiplier();
     this.color = this.updateColor(sinMultiplier);

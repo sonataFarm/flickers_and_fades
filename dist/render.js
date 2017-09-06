@@ -8,7 +8,7 @@ class Render {
 
   renderBoard() {
     this.resizeCanvasToWindow();
-
+    this.ctx.fillText("Hello World",10,50);
     const lightboxWidth  = Math.floor(this.canvas.width / this.dimensions);
     const lightboxHeight = Math.floor(this.canvas.height / this.dimensions);
     this.lightBoard.lightBoxes.forEach((row, rowIdx) => {
